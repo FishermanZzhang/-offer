@@ -1,4 +1,4 @@
-ass CMyString{
+class CMyString{
     public:
         CMyString(char* pData = NULL);
         CMyString(const CMyString& str);
@@ -7,7 +7,7 @@ ass CMyString{
     private:
         char* m_pData;
 
-}
+};
 
 //m1:
 CMyString& CMyString::operator = (const CMyString& str){
