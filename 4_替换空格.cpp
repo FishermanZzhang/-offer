@@ -3,6 +3,8 @@ class solution{
         //length 字符长的总容量
         //length = INT_MAX;
         void replaceBlank(char* const str, int length){
+            assert(length > 0);
+            if(str == NULL) return;
             char* p = str;
             int numblack = 0;
             int numotherchars = 0;
