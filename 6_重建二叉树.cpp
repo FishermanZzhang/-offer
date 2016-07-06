@@ -5,7 +5,7 @@ struct BinaryTreeNode{
  BinaryTreeNode(int val):data(val),left(NULL),right(NULL){}
 };
 
-class{
+class solution{
     public:
         BinaryTreeNode* construct(vector<int>& preorder, vector<int>& inorder){
             if(preorder.size() != inorder.size()){
