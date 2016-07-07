@@ -1,4 +1,4 @@
-//m1 恶汉
+//m1 饿汉
 class Singleton{
     public:
         static Singleton* getSingleton();
@@ -9,7 +9,7 @@ class Singleton{
 };
 Singleton* Singleton:: sing_ = new Singleton();
 
-// m2 恶汉
+// m2 饿汉
 class Singleton{
     public:
         static Singleton* getSingleton(){
