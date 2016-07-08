@@ -7,12 +7,7 @@ void DeleteNode(ListNode** head, ListNode* pdeltenode){
 	else if(pdeltenode->next != NULL){
 		pdeltenode->val = pdeltenode->next->val;
 		ListNode* p = pdeltenode->next;
-		if (p == NULL){
-			pdeltenode->next == NULL;
-		}
-		else{
-			pdeltenode->next = p->next;
-		}
+		pdeltenode->next = p->next;
 		delete p;
 	}
 	else{
