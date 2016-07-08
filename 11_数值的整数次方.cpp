@@ -1,5 +1,5 @@
 double Power(double base, int exponent){
-	function<double(double,int)> mypower = [&mypower](double base, int x){
+	function<double(double,int)> mypower = [&mypower](double base, unsigned x){
 		if (x == 0) return 1.0;
 		if (x == 1) return base;
 		double r = mypower(base, x / 2);
