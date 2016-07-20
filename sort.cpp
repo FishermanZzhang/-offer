@@ -85,6 +85,66 @@ class solution_quicksort : public solution_sort{
         }
 };
 
+class solution_heapsort{
+public:
+	void sort(vector<int>& nums){
+		heap_sort(nums);
+	}
+
+private:
+	void adjustHead(vector<int>& nums, int i, int length){
+		if (i <= (length - 1) /2 ){
+			int left = 2 * i + 1;
+			int right = 2 * i + 2;
+			int max_pos = i;
+			if (left < length && nums[left] > nums[max_pos]){
+				max_pos = left;
+			}
+			if (right < length && nums[right] > nums[max_pos]){
+				max_pos = right;
+			}
+			if (max_pos != i){
+				std::swap(nums[max_pos], nums[i]);
+				adjustHead(nums, max_pos, length);
+			}
+		}
+	}
+	void adjustHead2(vector<int>& nums, int i, int length){
+		while (i <= (length - 1) / 2){
+			int left = 2 * i + 1;
+			int right = 2 * i + 2;
+			int max_pos = i;
+			if (left < length && nums[left] > nums[max_pos]){
+				max_pos = left;
+			}
+			if (right < length && nums[right] > nums[max_pos]){
+				max_pos = right;
+			}
+			if (max_pos != i){
+				std::swap(nums[max_pos], nums[i]);
+				i = max_pos;
+			}
+			else{
+				break;
+			}
+		}
+	}
+
+	void buildHeap(vector<int>& nums){
+		for (int i = nums.size() / 2 - 1; i >= 0; --i){
+			adjustHead2(nums, i, nums.size());
+		}
+	}
+	void heap_sort(vector<int>& nums){
+		buildHeap(nums);
+		for (int i = nums.size() - 1; i > 0; --i){
+			std::swap(nums[0], nums[i]);
+			adjustHead2(nums, 0, i);
+		}
+	}
+
+};
+
 
 
 int main(){
