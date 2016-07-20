@@ -85,7 +85,7 @@ class solution_quicksort : public solution_sort{
         }
 };
 
-class solution_heapsort{
+class solution_heapsort : public solution_sort{
 public:
 	void sort(vector<int>& nums){
 		heap_sort(nums);
