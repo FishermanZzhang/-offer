@@ -1,3 +1,11 @@
-echo "remote command with works do: "$@
+# echo "remote command with works do: "$@
+# dirname=`pwd`
+# cat /home/servers/hadoop-3.1.4/etc/hadoop/workers | xargs -i ssh {} "cd $dirname && $@"
 dirname=`pwd`
-cat /home/servers/hadoop-3.1.4/etc/hadoop/workers | xargs -i ssh {} "cd $dirname && $@"
+workfile=/home/servers/hadoop-3.1.4/etc/hadoop/workers
+works=`cat $workfile`
+for host in $works
+do
+ echo ------------------- $host --------------
+ ssh $host "cd $dirname && $@" 
+done
