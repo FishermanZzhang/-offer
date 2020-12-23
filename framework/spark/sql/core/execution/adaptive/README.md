@@ -9,10 +9,6 @@
     if (!conf.coalesceShufflePartitionsEnabled) {
       return plan
     }
-    // spark.sql.adaptive.enabled 默认为false
-    if (!conf.coalesceShufflePartitionsEnabled) {
-      return plan
-    }
 
     // 查询依赖stage 的运行状态, 注释没看懂
     if (!plan.collectLeaves().forall(_.isInstanceOf[QueryStageExec])
