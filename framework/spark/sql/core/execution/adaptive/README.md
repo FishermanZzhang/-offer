@@ -152,7 +152,8 @@
 
 ### Dynamically switching join strategies
 ### Dynamically optimizing skew joins
-只有在`join`是才做此优化，在没有`join`的时候会出现和`动态合并分区`相反的情况，即某几个分区特别大，为什么没有做这种优化呢？
+只有在`join`是才做此优化，
+在没有`join`的时候也会出现和`动态合并分区`相反的情况，即某个分区的部分shuffle write特别大，为什么没有做这种优化呢？
 
 [原始代码](https://github.com/apache/spark/blob/v3.0.1/sql/core/src/main/scala/org/apache/spark/sql/execution/adaptive/OptimizeSkewedJoin.scala#L156) 函数入口依然为` override def apply(plan: SparkPlan)`此处忽略一些细节和调用栈
 ```
@@ -258,7 +259,7 @@
       val rightSidePartitions = mutable.ArrayBuffer.empty[ShufflePartitionSpec]
       val leftSkewDesc = new SkewDesc
       val rightSkewDesc = new SkewDesc
-      // 遍历每个partition，计算当前partition会划分个数。
+      // 遍历每个partition，计算当前partition划分个数。
       for (partitionIndex <- 0 until numPartitions) {
         val isLeftSkew = isSkewed(leftActualSizes(partitionIndex), leftMedSize) && canSplitLeft
         val leftPartSpec = left.partitionsWithSizes(partitionIndex)._1
@@ -310,7 +311,8 @@
       }
   }
   // createSkewPartitionSpecs --> ShufflePartitionsUtil.splitSizeListByTargetSize
-  // sizes 为同一个partiton不同shuffle write的长度 
+  // 变量 sizes 为同一个partiton不同shuffle write的长度 
+  // 返回值为数值，array在转换为PartitionSpecs
   def splitSizeListByTargetSize(sizes: Seq[Long], targetSize: Long): Array[Int] = {
     val partitionStartIndices = ArrayBuffer[Int]()
     partitionStartIndices += 0
