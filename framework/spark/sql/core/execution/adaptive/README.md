@@ -4,10 +4,11 @@
 ### Dynamically coalescing shuffle partitions
 [原始代码](https://github.com/apache/spark/blob/v3.0.1/sql/core/src/main/scala/org/apache/spark/sql/execution/adaptive/CoalesceShufflePartitions.scala#L33)
 ```
-  def coalescePartitions(
-      mapOutputStatistics: Array[MapOutputStatistics],
-      advisoryTargetSize: Long,
-      minNumPartitions: Int): Seq[ShufflePartitionSpec] = {  override def apply(plan: SparkPlan): SparkPlan = {
+  override def apply(plan: SparkPlan): SparkPlan = {
+    // spark.sql.adaptive.enabled 默认为false
+    if (!conf.coalesceShufflePartitionsEnabled) {
+      return plan
+    }
     // spark.sql.adaptive.enabled 默认为false
     if (!conf.coalesceShufflePartitionsEnabled) {
       return plan
