@@ -241,7 +241,7 @@
       // 获取分区个数
       val numPartitions = left.partitionsWithSizes.length
       // Use the median size of the actual (coalesced) partition sizes to detect skewed partitions.
-      // 根据每个partition分区，计算中位数
+      // 根据每个partition分布，计算中位数
       val leftMedSize = medianSize(left.partitionsWithSizes.map(_._2))
       val rightMedSize = medianSize(right.partitionsWithSizes.map(_._2))
       // 根据join类型判断是否可以spilt
@@ -312,7 +312,7 @@
   }
   // createSkewPartitionSpecs --> ShufflePartitionsUtil.splitSizeListByTargetSize
   // 变量 sizes 为同一个partiton不同shuffle write的长度 
-  // 返回值为数值，array在转换为PartitionSpecs
+  // 返回值为数组，array再转换为PartitionSpecs得到此partition的划分情况
   def splitSizeListByTargetSize(sizes: Seq[Long], targetSize: Long): Array[Int] = {
     val partitionStartIndices = ArrayBuffer[Int]()
     partitionStartIndices += 0
