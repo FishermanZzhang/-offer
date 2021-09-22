@@ -11,3 +11,6 @@ sudo perf report -i
 tcpdump -i any port ${port} -nn -vv ${name}.pcap
 使用Wireshark打开pcap文件
 
+
+#### clang 调试
+apt install lldb
