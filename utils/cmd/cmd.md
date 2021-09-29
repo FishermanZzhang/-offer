@@ -17,7 +17,7 @@ apt install lldb
 
 #### docker 
 1. push 
-for i in $(docker images | grep harbor | awk '{printf("%s:%s\n",(,[)}'); do docker push $i; done ']))}')
+for i in $(docker images | grep harbor | awk '{printf("%s:%s\n",$1,$2)}'); do docker push $i; done
 2. remove
 docker rmi -f $(docker images | grep "vect" | awk '{print $3}') 
 3. pull
